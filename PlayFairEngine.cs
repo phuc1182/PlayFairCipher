@@ -1,4 +1,5 @@
-﻿using System.Text;
+using System.Globalization;
+using System.Text;
 
 namespace PlayFairCipher
 {
@@ -62,6 +63,12 @@ namespace PlayFairCipher
         public string Decrypt(string key, string cipherText)
         {
             var normalized = NormalizeText(cipherText);
+            if (string.IsNullOrEmpty(normalized))
+                return string.Empty;
+
+            if (normalized.Length % 2 != 0)
+                throw new ArgumentException("Bản mã không hợp lệ: số lượng ký tự chữ cái phải là số chẵn.");
+
             var matrix = BuildMatrix(key);
             var pairs = SplitPairs(normalized);
 
@@ -153,6 +160,12 @@ namespace PlayFairCipher
         {
             var sb = new StringBuilder();
             var normalized = NormalizeText(cipherText);
+            if (string.IsNullOrEmpty(normalized))
+                return string.Empty;
+
+            if (normalized.Length % 2 != 0)
+                throw new ArgumentException("Bản mã không hợp lệ: số lượng ký tự chữ cái phải là số chẵn.");
+
             var matrix = BuildMatrix(key);
             var pairs = SplitPairs(normalized);
 
@@ -230,11 +243,35 @@ namespace PlayFairCipher
             return matrix;
         }
 
+        private static string RemoveVietnameseDiacritics(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            // Xử lý riêng ký tự Đ/đ vì Unicode FormD không tách Đ thành D + dấu
+            text = text.Replace('đ', 'd').Replace('Đ', 'D');
+
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+
         private static string NormalizeKey(string key)
         {
+            var withoutDiacritics = RemoveVietnameseDiacritics(key);
             var sb = new StringBuilder();
 
-            foreach (var ch in key.ToUpperInvariant())
+            foreach (var ch in withoutDiacritics.ToUpperInvariant())
             {
                 var c = ch == 'J' ? 'I' : ch;
                 if (Alphabet.Contains(c))
@@ -249,9 +286,10 @@ namespace PlayFairCipher
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;
 
+            var withoutDiacritics = RemoveVietnameseDiacritics(text);
             var sb = new StringBuilder();
 
-            foreach (var ch in text.ToUpperInvariant())
+            foreach (var ch in withoutDiacritics.ToUpperInvariant())
             {
                 var c = ch == 'J' ? 'I' : ch;
                 if (Alphabet.Contains(c))
@@ -266,23 +304,37 @@ namespace PlayFairCipher
             if (string.IsNullOrEmpty(text))
                 return new List<string>();
 
-            var builder = new StringBuilder(text);
+            var result = new List<string>();
+            int i = 0;
 
-            for (int i = 0; i < builder.Length - 1; i++)
+            while (i < text.Length)
             {
-                if (builder[i] == builder[i + 1])
+                char first = text[i];
+
+                if (i + 1 >= text.Length)
                 {
-                    builder.Insert(i + 1, 'X');
+                    // Ký tự lẻ cuối cùng -> đệm thêm 'X' (hoặc 'Q' nếu first == 'X')
+                    char pad = (first == 'X') ? 'Q' : 'X';
+                    result.Add($"{first}{pad}");
                     i++;
                 }
+                else
+                {
+                    char second = text[i + 1];
+                    if (first == second)
+                    {
+                        // Hai ký tự giống nhau trong cùng 1 cặp -> chèn ký tự đệm giữa chúng
+                        char pad = (first == 'X') ? 'Q' : 'X';
+                        result.Add($"{first}{pad}");
+                        i++; // second sẽ là phần tử đầu của cặp kế tiếp
+                    }
+                    else
+                    {
+                        result.Add($"{first}{second}");
+                        i += 2;
+                    }
+                }
             }
-
-            if (builder.Length % 2 != 0)
-                builder.Append('X');
-
-            var result = new List<string>();
-            for (int i = 0; i < builder.Length; i += 2)
-                result.Add(builder.ToString(i, 2));
 
             return result;
         }

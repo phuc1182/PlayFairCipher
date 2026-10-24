@@ -17,14 +17,12 @@
 
         private System.Windows.Forms.Label labelKey;
         private System.Windows.Forms.Label labelPlainText;
-        private System.Windows.Forms.Label labelCipherInput;
         private System.Windows.Forms.Label labelCipherText;
         private System.Windows.Forms.Label labelMatrix;
         private System.Windows.Forms.Label labelSteps;
 
         private System.Windows.Forms.TextBox txtKey;
         private System.Windows.Forms.TextBox txtPlainText;
-        private System.Windows.Forms.TextBox txtCipherInput;
         private System.Windows.Forms.TextBox txtCipherText;
         private System.Windows.Forms.RichTextBox txtMatrix;
         private System.Windows.Forms.RichTextBox txtSteps;
@@ -35,163 +33,190 @@
 
         private void InitializeComponent()
         {
-            this.labelKey = new System.Windows.Forms.Label();
-            this.labelPlainText = new System.Windows.Forms.Label();
-            this.labelCipherInput = new System.Windows.Forms.Label();
-            this.labelCipherText = new System.Windows.Forms.Label();
-            this.labelMatrix = new System.Windows.Forms.Label();
-            this.labelSteps = new System.Windows.Forms.Label();
-
-            this.txtKey = new System.Windows.Forms.TextBox();
-            this.txtPlainText = new System.Windows.Forms.TextBox();
-            this.txtCipherInput = new System.Windows.Forms.TextBox();
-            this.txtCipherText = new System.Windows.Forms.TextBox();
-            this.txtMatrix = new System.Windows.Forms.RichTextBox();
-            this.txtSteps = new System.Windows.Forms.RichTextBox();
-
-            this.btnEncrypt = new System.Windows.Forms.Button();
-            this.btnDecrypt = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-
-            this.SuspendLayout();
-
+            labelKey = new Label();
+            labelPlainText = new Label();
+            labelCipherText = new Label();
+            labelMatrix = new Label();
+            labelSteps = new Label();
+            txtKey = new TextBox();
+            txtPlainText = new TextBox();
+            txtCipherText = new TextBox();
+            txtMatrix = new RichTextBox();
+            txtSteps = new RichTextBox();
+            btnEncrypt = new Button();
+            btnDecrypt = new Button();
+            btnClear = new Button();
+            btnInformationCipherPlayFair = new Button();
+            SuspendLayout();
+            // 
             // labelKey
-            this.labelKey.AutoSize = true;
-            this.labelKey.Location = new System.Drawing.Point(20, 20);
-            this.labelKey.Name = "labelKey";
-            this.labelKey.Size = new System.Drawing.Size(54, 15);
-            this.labelKey.Text = "Khóa:";
-
-            // txtKey
-            this.txtKey.Location = new System.Drawing.Point(120, 20);
-            this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(260, 23);
-            this.txtKey.TextChanged += new System.EventHandler(this.txtKey_TextChanged);
-
+            // 
+            labelKey.AutoSize = true;
+            labelKey.Location = new Point(23, 27);
+            labelKey.Name = "labelKey";
+            labelKey.Size = new Size(46, 20);
+            labelKey.TabIndex = 0;
+            labelKey.Text = "Khóa:";
+            // 
             // labelPlainText
-            this.labelPlainText.AutoSize = true;
-            this.labelPlainText.Location = new System.Drawing.Point(20, 60);
-            this.labelPlainText.Name = "labelPlainText";
-            this.labelPlainText.Size = new System.Drawing.Size(78, 15);
-            this.labelPlainText.Text = "Bản rõ:";
-
-            // txtPlainText
-            this.txtPlainText.Location = new System.Drawing.Point(120, 60);
-            this.txtPlainText.Multiline = true;
-            this.txtPlainText.Name = "txtPlainText";
-            this.txtPlainText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPlainText.Size = new System.Drawing.Size(260, 110);
-
-            // labelCipherInput
-            this.labelCipherInput.AutoSize = true;
-            this.labelCipherInput.Location = new System.Drawing.Point(20, 185);
-            this.labelCipherInput.Name = "labelCipherInput";
-            this.labelCipherInput.Size = new System.Drawing.Size(79, 15);
-            this.labelCipherInput.Text = "Bản mã nhập:";
-
-            // txtCipherInput
-            this.txtCipherInput.Location = new System.Drawing.Point(120, 185);
-            this.txtCipherInput.Multiline = true;
-            this.txtCipherInput.Name = "txtCipherInput";
-            this.txtCipherInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCipherInput.Size = new System.Drawing.Size(260, 110);
-
+            // 
+            labelPlainText.AutoSize = true;
+            labelPlainText.Location = new Point(23, 80);
+            labelPlainText.Name = "labelPlainText";
+            labelPlainText.Size = new Size(55, 20);
+            labelPlainText.TabIndex = 2;
+            labelPlainText.Text = "Bản rõ:";
+            // 
             // labelCipherText
-            this.labelCipherText.AutoSize = true;
-            this.labelCipherText.Location = new System.Drawing.Point(20, 310);
-            this.labelCipherText.Name = "labelCipherText";
-            this.labelCipherText.Size = new System.Drawing.Size(73, 15);
-            this.labelCipherText.Text = "Bản mã:";
-
-            // txtCipherText
-            this.txtCipherText.Location = new System.Drawing.Point(120, 310);
-            this.txtCipherText.Multiline = true;
-            this.txtCipherText.Name = "txtCipherText";
-            this.txtCipherText.ReadOnly = true;
-            this.txtCipherText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCipherText.Size = new System.Drawing.Size(260, 110);
-
-            // btnEncrypt
-            this.btnEncrypt.Location = new System.Drawing.Point(120, 440);
-            this.btnEncrypt.Name = "btnEncrypt";
-            this.btnEncrypt.Size = new System.Drawing.Size(90, 32);
-            this.btnEncrypt.Text = "Mã hóa";
-            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
-
-            // btnDecrypt
-            this.btnDecrypt.Location = new System.Drawing.Point(220, 440);
-            this.btnDecrypt.Name = "btnDecrypt";
-            this.btnDecrypt.Size = new System.Drawing.Size(90, 32);
-            this.btnDecrypt.Text = "Giải mã";
-            this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
-
-            // btnClear
-            this.btnClear.Location = new System.Drawing.Point(320, 440);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(60, 32);
-            this.btnClear.Text = "Xóa";
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-
+            // 
+            labelCipherText.AutoSize = true;
+            labelCipherText.Location = new Point(23, 247);
+            labelCipherText.Name = "labelCipherText";
+            labelCipherText.Size = new Size(62, 20);
+            labelCipherText.TabIndex = 4;
+            labelCipherText.Text = "Bản mã:";
+            // 
             // labelMatrix
-            this.labelMatrix.AutoSize = true;
-            this.labelMatrix.Location = new System.Drawing.Point(470, 20);
-            this.labelMatrix.Name = "labelMatrix";
-            this.labelMatrix.Size = new System.Drawing.Size(73, 15);
-            this.labelMatrix.Text = "Bảng khóa:";
-
-            // txtMatrix
-            this.txtMatrix.Location = new System.Drawing.Point(470, 40);
-            this.txtMatrix.Name = "txtMatrix";
-            this.txtMatrix.ReadOnly = true;
-            this.txtMatrix.Size = new System.Drawing.Size(260, 140);
-            this.txtMatrix.Font = new System.Drawing.Font("Consolas", 14F);
-
+            // 
+            labelMatrix.AutoSize = true;
+            labelMatrix.Location = new Point(537, 27);
+            labelMatrix.Name = "labelMatrix";
+            labelMatrix.Size = new Size(82, 20);
+            labelMatrix.TabIndex = 9;
+            labelMatrix.Text = "Bảng khóa:";
+            // 
             // labelSteps
-            this.labelSteps.AutoSize = true;
-            this.labelSteps.Location = new System.Drawing.Point(470, 200);
-            this.labelSteps.Name = "labelSteps";
-            this.labelSteps.Size = new System.Drawing.Size(119, 15);
-            this.labelSteps.Text = "Hiển thị từng bước:";
-
+            // 
+            labelSteps.AutoSize = true;
+            labelSteps.Location = new Point(844, 27);
+            labelSteps.Name = "labelSteps";
+            labelSteps.Size = new Size(137, 20);
+            labelSteps.TabIndex = 11;
+            labelSteps.Text = "Hiển thị từng bước:";
+            labelSteps.Click += labelSteps_Click;
+            // 
+            // txtKey
+            // 
+            txtKey.Location = new Point(137, 27);
+            txtKey.Margin = new Padding(3, 4, 3, 4);
+            txtKey.Name = "txtKey";
+            txtKey.Size = new Size(297, 27);
+            txtKey.TabIndex = 1;
+            txtKey.TextChanged += txtKey_TextChanged;
+            // 
+            // txtPlainText
+            // 
+            txtPlainText.Location = new Point(137, 80);
+            txtPlainText.Margin = new Padding(3, 4, 3, 4);
+            txtPlainText.Multiline = true;
+            txtPlainText.Name = "txtPlainText";
+            txtPlainText.ScrollBars = ScrollBars.Vertical;
+            txtPlainText.Size = new Size(297, 145);
+            txtPlainText.TabIndex = 3;
+            // 
+            // txtCipherText
+            // 
+            txtCipherText.Location = new Point(137, 247);
+            txtCipherText.Margin = new Padding(3, 4, 3, 4);
+            txtCipherText.Multiline = true;
+            txtCipherText.Name = "txtCipherText";
+            txtCipherText.ScrollBars = ScrollBars.Vertical;
+            txtCipherText.Size = new Size(297, 145);
+            txtCipherText.TabIndex = 5;
+            // 
+            // txtMatrix
+            // 
+            txtMatrix.Font = new Font("Consolas", 14F);
+            txtMatrix.Location = new Point(537, 53);
+            txtMatrix.Margin = new Padding(3, 4, 3, 4);
+            txtMatrix.Name = "txtMatrix";
+            txtMatrix.ReadOnly = true;
+            txtMatrix.Size = new Size(201, 172);
+            txtMatrix.TabIndex = 10;
+            txtMatrix.Text = "";
+            // 
             // txtSteps
-            this.txtSteps.Location = new System.Drawing.Point(470, 220);
-            this.txtSteps.Name = "txtSteps";
-            this.txtSteps.ReadOnly = true;
-            this.txtSteps.Size = new System.Drawing.Size(260, 220);
-            this.txtSteps.Font = new System.Drawing.Font("Consolas", 10F);
-
+            // 
+            txtSteps.Font = new Font("Consolas", 10F);
+            txtSteps.Location = new Point(844, 53);
+            txtSteps.Margin = new Padding(3, 4, 3, 4);
+            txtSteps.Name = "txtSteps";
+            txtSteps.ReadOnly = true;
+            txtSteps.Size = new Size(476, 567);
+            txtSteps.TabIndex = 12;
+            txtSteps.Text = "";
+            // 
+            // btnEncrypt
+            // 
+            btnEncrypt.Location = new Point(137, 420);
+            btnEncrypt.Margin = new Padding(3, 4, 3, 4);
+            btnEncrypt.Name = "btnEncrypt";
+            btnEncrypt.Size = new Size(103, 43);
+            btnEncrypt.TabIndex = 6;
+            btnEncrypt.Text = "Mã hóa";
+            btnEncrypt.Click += btnEncrypt_Click;
+            // 
+            // btnDecrypt
+            // 
+            btnDecrypt.Location = new Point(251, 420);
+            btnDecrypt.Margin = new Padding(3, 4, 3, 4);
+            btnDecrypt.Name = "btnDecrypt";
+            btnDecrypt.Size = new Size(103, 43);
+            btnDecrypt.TabIndex = 7;
+            btnDecrypt.Text = "Giải mã";
+            btnDecrypt.Click += btnDecrypt_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(366, 420);
+            btnClear.Margin = new Padding(3, 4, 3, 4);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(69, 43);
+            btnClear.TabIndex = 8;
+            btnClear.Text = "Xóa";
+            btnClear.Click += btnClear_Click;
+            // 
+            // btnInformationCipherPlayFair
+            // 
+            btnInformationCipherPlayFair.Location = new Point(23, 566);
+            btnInformationCipherPlayFair.Name = "btnInformationCipherPlayFair";
+            btnInformationCipherPlayFair.Size = new Size(297, 29);
+            btnInformationCipherPlayFair.TabIndex = 13;
+            btnInformationCipherPlayFair.Text = "Hệ mật PlayFair( PlayFair cipher) là gì ?";
+            btnInformationCipherPlayFair.UseVisualStyleBackColor = true;
+            btnInformationCipherPlayFair.Click += button1_Click;
+            // 
             // Form1
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 500);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Playfair Cipher Demo";
-            this.Load += new System.EventHandler(this.Form1_Load);
-
-            this.Controls.Add(this.labelKey);
-            this.Controls.Add(this.txtKey);
-            this.Controls.Add(this.labelPlainText);
-            this.Controls.Add(this.txtPlainText);
-            this.Controls.Add(this.labelCipherInput);
-            this.Controls.Add(this.txtCipherInput);
-            this.Controls.Add(this.labelCipherText);
-            this.Controls.Add(this.txtCipherText);
-            this.Controls.Add(this.btnEncrypt);
-            this.Controls.Add(this.btnDecrypt);
-            this.Controls.Add(this.btnClear);
-
-            this.Controls.Add(this.labelMatrix);
-            this.Controls.Add(this.txtMatrix);
-            this.Controls.Add(this.labelSteps);
-            this.Controls.Add(this.txtSteps);
-
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(1363, 633);
+            Controls.Add(btnInformationCipherPlayFair);
+            Controls.Add(labelKey);
+            Controls.Add(txtKey);
+            Controls.Add(labelPlainText);
+            Controls.Add(txtPlainText);
+            Controls.Add(labelCipherText);
+            Controls.Add(txtCipherText);
+            Controls.Add(btnEncrypt);
+            Controls.Add(btnDecrypt);
+            Controls.Add(btnClear);
+            Controls.Add(labelMatrix);
+            Controls.Add(txtMatrix);
+            Controls.Add(labelSteps);
+            Controls.Add(txtSteps);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Playfair Cipher Demo";
+            Load += Form1_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Button btnInformationCipherPlayFair;
     }
 }
