@@ -2,112 +2,30 @@ namespace PlayFairCipher
 {
     public partial class FormAbout : Form
     {
-        private RichTextBox rtbContent = null!;
-        private Panel panelBottom = null!;
-        private Button btnZoomIn = null!;
-        private Button btnZoomOut = null!;
-        private Button btnResetZoom = null!;
-        private Button btnClose = null!;
-
         public FormAbout()
         {
             InitializeComponent();
             LoadContent();
         }
 
-        private void InitializeComponent()
+        private void btnZoomIn_Click(object? sender, EventArgs e)
         {
-            this.rtbContent = new RichTextBox();
-            this.panelBottom = new Panel();
-            this.btnZoomIn = new Button();
-            this.btnZoomOut = new Button();
-            this.btnResetZoom = new Button();
-            this.btnClose = new Button();
+            Zoom(1.2f);
+        }
 
-            this.SuspendLayout();
-            this.panelBottom.SuspendLayout();
+        private void btnZoomOut_Click(object? sender, EventArgs e)
+        {
+            Zoom(0.833f);
+        }
 
-            // 
-            // rtbContent
-            // 
-            this.rtbContent.Dock = DockStyle.Fill;
-            this.rtbContent.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            this.rtbContent.ReadOnly = true;
-            this.rtbContent.BackColor = Color.White;
-            this.rtbContent.ForeColor = Color.FromArgb(30, 30, 30);
-            this.rtbContent.BorderStyle = BorderStyle.None;
-            this.rtbContent.Padding = new Padding(20);
-            this.rtbContent.Name = "rtbContent";
+        private void btnResetZoom_Click(object? sender, EventArgs e)
+        {
+            this.rtbContent.ZoomFactor = 1.0f;
+        }
 
-            // 
-            // panelBottom
-            // 
-            this.panelBottom.Dock = DockStyle.Bottom;
-            this.panelBottom.Height = 55;
-            this.panelBottom.BackColor = Color.FromArgb(245, 245, 247);
-            this.panelBottom.Controls.Add(this.btnZoomIn);
-            this.panelBottom.Controls.Add(this.btnZoomOut);
-            this.panelBottom.Controls.Add(this.btnResetZoom);
-            this.panelBottom.Controls.Add(this.btnClose);
-            this.panelBottom.Name = "panelBottom";
-
-            // 
-            // btnZoomIn
-            // 
-            this.btnZoomIn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.btnZoomIn.Location = new Point(15, 10);
-            this.btnZoomIn.Size = new Size(110, 35);
-            this.btnZoomIn.Text = "Phóng to (+)";
-            this.btnZoomIn.UseVisualStyleBackColor = true;
-            this.btnZoomIn.Click += (s, e) => Zoom(1.2f);
-
-            // 
-            // btnZoomOut
-            // 
-            this.btnZoomOut.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.btnZoomOut.Location = new Point(135, 10);
-            this.btnZoomOut.Size = new Size(110, 35);
-            this.btnZoomOut.Text = "Thu nhỏ (-)";
-            this.btnZoomOut.UseVisualStyleBackColor = true;
-            this.btnZoomOut.Click += (s, e) => Zoom(0.833f);
-
-            // 
-            // btnResetZoom
-            // 
-            this.btnResetZoom.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.btnResetZoom.Location = new Point(255, 10);
-            this.btnResetZoom.Size = new Size(110, 35);
-            this.btnResetZoom.Text = "Đặt lại cỡ (100%)";
-            this.btnResetZoom.UseVisualStyleBackColor = true;
-            this.btnResetZoom.Click += (s, e) => this.rtbContent.ZoomFactor = 1.0f;
-
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            this.btnClose.Location = new Point(665, 10);
-            this.btnClose.Size = new Size(100, 35);
-            this.btnClose.Text = "Đóng";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += (s, e) => this.Close();
-
-            // 
-            // FormAbout
-            // 
-            this.AutoScaleDimensions = new SizeF(8F, 20F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(780, 560);
-            this.Controls.Add(this.rtbContent);
-            this.Controls.Add(this.panelBottom);
-            this.MinimumSize = new Size(500, 400);
-            this.Name = "FormAbout";
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.Text = "Giới thiệu Hệ mật Playfair (Playfair Cipher)";
-            this.MaximizeBox = true;
-            this.MinimizeBox = true;
-
-            this.panelBottom.ResumeLayout(false);
-            this.ResumeLayout(false);
+        private void btnClose_Click(object? sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void Zoom(float factor)

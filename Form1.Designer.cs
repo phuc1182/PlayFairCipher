@@ -33,6 +33,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             labelKey = new Label();
             labelPlainText = new Label();
             labelCipherText = new Label();
@@ -52,7 +53,7 @@
             // labelKey
             // 
             labelKey.AutoSize = true;
-            labelKey.Location = new Point(23, 27);
+            labelKey.Location = new Point(23, 53);
             labelKey.Name = "labelKey";
             labelKey.Size = new Size(46, 20);
             labelKey.TabIndex = 0;
@@ -61,7 +62,7 @@
             // labelPlainText
             // 
             labelPlainText.AutoSize = true;
-            labelPlainText.Location = new Point(23, 80);
+            labelPlainText.Location = new Point(23, 179);
             labelPlainText.Name = "labelPlainText";
             labelPlainText.Size = new Size(55, 20);
             labelPlainText.TabIndex = 2;
@@ -70,7 +71,7 @@
             // labelCipherText
             // 
             labelCipherText.AutoSize = true;
-            labelCipherText.Location = new Point(23, 247);
+            labelCipherText.Location = new Point(23, 343);
             labelCipherText.Name = "labelCipherText";
             labelCipherText.Size = new Size(62, 20);
             labelCipherText.TabIndex = 4;
@@ -81,9 +82,9 @@
             labelMatrix.AutoSize = true;
             labelMatrix.Location = new Point(537, 27);
             labelMatrix.Name = "labelMatrix";
-            labelMatrix.Size = new Size(82, 20);
+            labelMatrix.Size = new Size(126, 20);
             labelMatrix.TabIndex = 9;
-            labelMatrix.Text = "Bảng khóa:";
+            labelMatrix.Text = "Ma trận khóa 5x5:";
             // 
             // labelSteps
             // 
@@ -97,16 +98,18 @@
             // 
             // txtKey
             // 
-            txtKey.Location = new Point(137, 27);
+            txtKey.Location = new Point(137, 53);
             txtKey.Margin = new Padding(3, 4, 3, 4);
+            txtKey.Multiline = true;
             txtKey.Name = "txtKey";
-            txtKey.Size = new Size(297, 27);
+            txtKey.ScrollBars = ScrollBars.Vertical;
+            txtKey.Size = new Size(297, 118);
             txtKey.TabIndex = 1;
             txtKey.TextChanged += txtKey_TextChanged;
             // 
             // txtPlainText
             // 
-            txtPlainText.Location = new Point(137, 80);
+            txtPlainText.Location = new Point(137, 179);
             txtPlainText.Margin = new Padding(3, 4, 3, 4);
             txtPlainText.Multiline = true;
             txtPlainText.Name = "txtPlainText";
@@ -116,7 +119,7 @@
             // 
             // txtCipherText
             // 
-            txtCipherText.Location = new Point(137, 247);
+            txtCipherText.Location = new Point(137, 343);
             txtCipherText.Margin = new Padding(3, 4, 3, 4);
             txtCipherText.Multiline = true;
             txtCipherText.Name = "txtCipherText";
@@ -142,13 +145,14 @@
             txtSteps.Margin = new Padding(3, 4, 3, 4);
             txtSteps.Name = "txtSteps";
             txtSteps.ReadOnly = true;
+            txtSteps.ScrollBars = RichTextBoxScrollBars.Vertical;
             txtSteps.Size = new Size(476, 567);
             txtSteps.TabIndex = 12;
             txtSteps.Text = "";
             // 
             // btnEncrypt
             // 
-            btnEncrypt.Location = new Point(137, 420);
+            btnEncrypt.Location = new Point(137, 516);
             btnEncrypt.Margin = new Padding(3, 4, 3, 4);
             btnEncrypt.Name = "btnEncrypt";
             btnEncrypt.Size = new Size(103, 43);
@@ -158,7 +162,7 @@
             // 
             // btnDecrypt
             // 
-            btnDecrypt.Location = new Point(251, 420);
+            btnDecrypt.Location = new Point(251, 516);
             btnDecrypt.Margin = new Padding(3, 4, 3, 4);
             btnDecrypt.Name = "btnDecrypt";
             btnDecrypt.Size = new Size(103, 43);
@@ -168,7 +172,7 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(366, 420);
+            btnClear.Location = new Point(366, 516);
             btnClear.Margin = new Padding(3, 4, 3, 4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(69, 43);
@@ -206,10 +210,11 @@
             Controls.Add(txtMatrix);
             Controls.Add(labelSteps);
             Controls.Add(txtSteps);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Playfair Cipher Demo";
+            Text = "Playfair Cipher ";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
